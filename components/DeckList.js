@@ -17,7 +17,7 @@ class DeckList extends React.Component {
     renderItem = ({item}) => (
                 <View  >
 
-                        <TouchableOpacity style={styles.box}>
+                        <TouchableOpacity style={styles.box} onPress={() => this.props.navigation.navigate('IndividualDeckView')}>
                             <SingleDeckDisplay //can pass title and questions to SingleDeckDisplay as props
                                 title={item.title}
                                 questions={item.questions}/>
@@ -32,7 +32,7 @@ class DeckList extends React.Component {
             const getDeckData = this.returnDeckData()
                 return (
                         <View >
-                            <Text style={styles.title}>DECKS</Text>
+
                                 <FlatList
                                     data={getDeckData}
                                     renderItem={this.renderItem}
@@ -51,10 +51,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
 
     },
-    title: {
-        marginTop:40,
-       fontSize:24
-    },
+
 });
 
 export default connect(mapStateToProps)(DeckList)

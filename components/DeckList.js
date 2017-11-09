@@ -1,31 +1,46 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-
-     const state= [
-        {
-            id: 0,
-            title: 'React and Redux Minutes',
-            cards: [1, 2, 3, 4]
-    },
-
-
-];
+import { StyleSheet, Text, View, FlatList,TouchableOpacity } from 'react-native';
+import {getDecks} from '../actions/index'
+import {fetchDecks} from '../utils/AsyncStorage'
+import {connect} from 'react-redux';
+import decks from '../reducers/index';
+import SingleDeckDisplay from "../components/SingleDeckDisplay";
 class DeckList extends React.Component {
-            renderItem = ({item}) => {
-                    return (
-                            <View >
-                                    <Text >{item.title}</Text>
-                                    <Text >{item.cards.length}</Text>
-                                </View>
-                        );
-                };
+    componentDidMount() {
+                fetchDecks()
+                    .then(decks => this.props.dispatch(getDecks(decks)))
 
-            render() {
-                    return (
-                            <FlatList data={state} renderItem={this.renderItem} />
-                        );
-                }
+            }
+    returnDeckData=()=>{
+        return Object.values(this.props.decks)
     }
+    renderItem = ({item}) => (
+                <View >
+                        <TouchableOpacity>
+                            <SingleDeckDisplay //can pass title and questions to SingleDeckDisplay as props
+                                title={item.title}
+                                questions={item.questions}/>
+                        </TouchableOpacity>
+        </View>
+    );
 
 
-export default DeckList
+        render() {
+            console.log(this.props)
+            const getDeckData = this.returnDeckData()
+                return (
+                        <View >
+                                <FlatList
+                                    data={getDeckData}
+                                    renderItem={this.renderItem}
+                                    keyExtractor={(item, index) => index}/>
+                </View>
+                );
+            }
+}
+function mapStateToProps(state) {
+        return {
+                decks: state,
+            };
+    }
+export default connect(mapStateToProps)(DeckList)

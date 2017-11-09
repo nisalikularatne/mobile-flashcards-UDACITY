@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList,TouchableOpacity  } from 'react-native';
 import {getDecks} from '../actions/index'
 import {fetchDecks} from '../utils/AsyncStorage'
 import {connect} from 'react-redux';
@@ -15,12 +15,14 @@ class DeckList extends React.Component {
         return Object.values(this.props.decks)
     }
     renderItem = ({item}) => (
-                <View >
-                        <TouchableOpacity>
+                <View  >
+
+                        <TouchableOpacity style={styles.box}>
                             <SingleDeckDisplay //can pass title and questions to SingleDeckDisplay as props
                                 title={item.title}
                                 questions={item.questions}/>
                         </TouchableOpacity>
+
         </View>
     );
 
@@ -30,6 +32,7 @@ class DeckList extends React.Component {
             const getDeckData = this.returnDeckData()
                 return (
                         <View >
+                            <Text style={styles.title}>DECKS</Text>
                                 <FlatList
                                     data={getDeckData}
                                     renderItem={this.renderItem}
@@ -43,4 +46,15 @@ function mapStateToProps(state) {
                 decks: state,
             };
     }
+const styles = StyleSheet.create({
+    deck: {
+        flexDirection: 'row',
+
+    },
+    title: {
+        marginTop:40,
+       fontSize:24
+    },
+});
+
 export default connect(mapStateToProps)(DeckList)

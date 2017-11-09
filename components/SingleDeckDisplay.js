@@ -5,12 +5,28 @@ class SingleDeckDisplay extends React.Component {
     render() {
 
         return (
-            <View >
-                <Text>{this.props.title}</Text>
-                <Text>{this.props.questions.length} cards</Text>
+            <View style={styles.deck}>
+                < View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <Text  style={styles.text}>{this.props.title}</Text>
+                <Text  style={styles.text}>{this.props.questions.length} cards</Text>
+            </View>
             </View>
 
         )
     }
 }
+const styles = StyleSheet.create({
+    deck: {
+        flexDirection: 'row',
+        marginTop: 12,
+        height: 120,
+        backgroundColor: '#11000c',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    text: {
+        color:'#fdfbf5',
+        fontSize:24
+    }
+});
 export default SingleDeckDisplay

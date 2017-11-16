@@ -17,7 +17,7 @@ class DeckList extends React.Component {
     renderItem = ({item}) => (
                 <View  >
 
-                        <TouchableOpacity style={styles.box} onPress={() => this.props.navigation.navigate('IndividualDeckView',{entryId:item})}>
+                        <TouchableOpacity style={styles.box} onPress={() => this.props.navigation.navigate('IndividualDeckView',item)}>
                             <SingleDeckDisplay //can pass title and questions to SingleDeckDisplay as props
                                 title={item.title}
                                 questions={item.questions}/>

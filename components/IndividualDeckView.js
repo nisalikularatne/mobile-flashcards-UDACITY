@@ -2,27 +2,26 @@ import React from 'react';
 import {View, StyleSheet, Text,TouchableOpacity } from 'react-native';
 import {connect} from 'react-redux';
 class IndividualDeckView extends React.Component {
-    static navigationOptions = ({ navigation }) => {
-        const { entryId } = navigation.state.params
 
-        return {
-            title: `${entryId.title}`
-        }
-    }
 
     render() {
-        const { entryId } = this.props.navigation.state.params
-        const questions =this.props.decks[entryId.title] &&  this.props.decks[entryId.title].questions;
+        const { title } = this.props.navigation.state.params
+        const questions =this.props.decks[title] &&  this.props.decks[title].questions;
        return(
            <View>
            <View style={styles.deck}>
                < View style={{justifyContent: 'center', alignItems: 'center'}}>
-                   <Text  style={styles.text}>{entryId.title}</Text>
+                   <Text  style={styles.text}>{title}</Text>
                    <Text  style={styles.text}>{questions.length} cards</Text>
                </View>
            </View>
                <View style={styles.addcard}>
-                   <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}}><Text style={styles.text}>Add Card</Text>
+                   <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}}><Text style={styles.text} onPress={() => {
+                       this.props.navigation.navigate('NewQuestion', {
+                           title,
+                           questions,
+                       });
+                   }}>Add Card</Text>
                </TouchableOpacity>
            </View>
            </View>

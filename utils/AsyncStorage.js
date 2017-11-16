@@ -1,7 +1,8 @@
 import {AsyncStorage} from 'react-native';
 
-export const DECKS_STORAGE_KEY = 'decks:udacicards';
-const information = {
+export const DECKS_STORAGE_KEY = 'decks:mobile-flashcards';
+
+let information = {
     React: {
         title: 'React',
         questions: [
@@ -26,9 +27,34 @@ const information = {
         ]
     }
 };
+
 export function fetchDecks() {
-    return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(()=>{ //code inspired by the tutorial..modified accordingly
-        AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(information));
-        return information;
+    return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {
+        if(results === null){
+            AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(information));
+            return information;
+        }
+        else{
+            return JSON.parse(results)
+        }
     });
 }
+
+
+
+export function addQuestionForDeck({card, deckName}) {
+    return AsyncStorage.getItem(DECKS_STORAGE_KEY, (err, result) => {
+        let decks = JSON.parse(result);
+        console.log(decks)
+
+        let newQuestions = JSON.parse(JSON.stringify(decks[deckName].questions));
+        newQuestions[newQuestions.length] = card;
+
+        const value = JSON.stringify({
+            [deckName]: {title: deckName, questions: newQuestions},
+        });
+
+        AsyncStorage.mergeItem(DECKS_STORAGE_KEY, value);
+    });
+}
+

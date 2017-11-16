@@ -1,4 +1,5 @@
 export const FETCH_DECKS = 'FETCH_DECKS';
+export const ADD_QUESTION = 'ADD_QUESTION';
 function decks(state = {}, action) {
     switch (action.type) {
         case FETCH_DECKS:

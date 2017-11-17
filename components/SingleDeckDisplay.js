@@ -7,8 +7,8 @@ class SingleDeckDisplay extends React.Component {
         return (
             <View style={styles.deck}>
                 < View style={{justifyContent: 'center', alignItems: 'center'}}>
-                <Text  style={styles.text}>{this.props.title}</Text>
-                <Text  style={styles.text}>{this.props.questions.length} cards</Text>
+                <Text  style={styles.NewDeck}>{this.props.title}</Text>
+                <Text  style={styles.NewDeck}>{this.props.questions.length} cards</Text>
             </View>
             </View>
 
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 12,
         height: 120,
-        backgroundColor: '#11000c',
+        backgroundColor: '#fbfffa',
         justifyContent: 'center',
         alignItems: 'center'
     },

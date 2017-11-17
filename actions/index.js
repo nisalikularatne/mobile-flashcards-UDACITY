@@ -1,5 +1,6 @@
 export const FETCH_DECKS = 'FETCH_DECKS';
 export const ADD_QUESTION = 'ADD_QUESTION';
+export const ADD_DECK = 'ADD_DECK';
 export function getDecks(decks) {
     return {
                 type: FETCH_DECKS,
@@ -12,3 +13,10 @@ export function addQuestion(params) {
                 params,
             };
     }
+
+export function addDeck(deck) {
+    return{
+        type: ADD_DECK,
+        deck,
+    }
+}

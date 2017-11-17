@@ -27,7 +27,9 @@ let information = {
         ]
     }
 };
-
+export function createDeck(deck) {
+    return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(deck));
+}
 export function fetchDecks() {
     return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {
         if(results === null){

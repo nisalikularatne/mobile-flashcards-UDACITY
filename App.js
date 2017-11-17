@@ -3,17 +3,34 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DeckList from "./components/DeckList";
 import NewQuestion from "./components/NewQuestion";
+import NewDeck from "./components/NewDeck";
 import IndividualDeckView from "./components/IndividualDeckView";
 import { createStore,applyMiddleware,compose } from 'redux'
-import {StackNavigator} from 'react-navigation';
+import {StackNavigator,TabNavigator} from 'react-navigation';
 import { Provider } from 'react-redux'
 import reducer from './reducers'
+const Tabs = TabNavigator({
+        DeckList: {
+            screen: DeckList,
+            navigationOptions: {
+                tabBarLabel: 'DeckList',
+                headerTintColor: '#edf1fd',
+            },
+        },
+        NewDeck: {
+            screen: NewDeck,
+            navigationOptions: {
+                tabBarLabel: 'New Deck',
+                headerTintColor: '#e4f7fd',
+            },
+        },
+    }
+);
 const MainNavigator = StackNavigator({
     Home: {
-        screen: DeckList,
-        navigationOptions:
-            {title: 'Decks'},
-        headerTintColor: '#479aee',
+        screen: Tabs,
+        navigationOptions: {title: 'Home', headerTintColor: '#726bff',},
+
     },
     IndividualDeckView: {
         screen: IndividualDeckView,
@@ -46,7 +63,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#effff6',
     alignItems: 'center',
     justifyContent: 'center',
   },

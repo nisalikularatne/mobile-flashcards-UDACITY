@@ -1,5 +1,6 @@
 export const FETCH_DECKS = 'FETCH_DECKS';
 export const ADD_QUESTION = 'ADD_QUESTION';
+export const ADD_DECK = 'ADD_DECK';
 function decks(state = {}, action) {
     switch (action.type) {
         case FETCH_DECKS:
@@ -12,6 +13,8 @@ function decks(state = {}, action) {
                 ...state,
                 [title]: {...state[title], questions: newQuestions},
             };
+        case ADD_DECK:
+            return {...state, ...action.deck};
 
         default:
             return state;

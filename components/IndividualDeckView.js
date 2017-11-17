@@ -11,12 +11,12 @@ class IndividualDeckView extends React.Component {
            <View>
            <View style={styles.deck}>
                < View style={{justifyContent: 'center', alignItems: 'center'}}>
-                   <Text  style={styles.text}>{title}</Text>
-                   <Text  style={styles.text}>{questions.length} cards</Text>
+                   <Text  style={styles.NewDeck}>{title}</Text>
+                   <Text  style={styles.NewDeck}>{questions.length} cards</Text>
                </View>
            </View>
                <View style={styles.addcard}>
-                   <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}}><Text style={styles.text} onPress={() => {
+                   <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}}><Text style={styles.NewDeck} onPress={() => {
                        this.props.navigation.navigate('NewQuestion', {
                            title,
                            questions,

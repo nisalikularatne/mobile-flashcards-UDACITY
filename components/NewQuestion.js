@@ -38,7 +38,7 @@ class NewQuestion extends React.Component {
                 Alert.alert('Success', 'Question Added Successfully',
                     [
                         {
-                            text: 'OK', onPress: () =>
+                            NewDeck: 'OK', onPress: () =>
                             this.props.navigation.goBack()
                         }
                     ],);
@@ -54,13 +54,13 @@ class NewQuestion extends React.Component {
                                     <TextInput
                                         defaultValue="Question"
                                         value={question}
-                                        style={style.input}
+                                        style={style.TextInputField}
                                         onChangeText={question => this.setState({question})}/>
                         <Text  style={style.TextToSubmit}>Type in the answer below</Text>
                         <TextInput
                      defaultValue="Answer"
                             value={answer}
-                            style={style.input}
+                            style={style.TextInputField}
                             onChangeText={answer => this.setState({answer})}/>
 
                         <TouchableOpacity
@@ -80,7 +80,7 @@ const style = StyleSheet.create({
                 alignItems: 'center',
                 paddingTop: 20,
             },
-    input: {
+    TextInputField: {
             width: 350,
                 height: 70,
                 padding: 12,

@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DeckList from "./components/DeckList";
 import NewQuestion from "./components/NewQuestion";
+import Quiz from "./components/Quiz";
 import NewDeck from "./components/NewDeck";
 import IndividualDeckView from "./components/IndividualDeckView";
 import { createStore,applyMiddleware,compose } from 'redux'
@@ -44,6 +45,14 @@ const MainNavigator = StackNavigator({
                 title: 'Add Question to the deck',
                 headerTintColor: '#000',
             },
+
+    },
+    Quiz: {
+        screen: Quiz,
+        navigationOptions: {
+            title: 'Quiz',
+            headerTintColor: '#1456ff',
+        },
     },
 
 });

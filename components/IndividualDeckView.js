@@ -16,14 +16,25 @@ class IndividualDeckView extends React.Component {
                </View>
            </View>
                <View style={styles.addcard}>
-                   <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}}><Text style={styles.NewDeck} onPress={() => {
+                   <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}}><Text style={styles.Titles} onPress={() => {
                        this.props.navigation.navigate('NewQuestion', {
                            title,
                            questions,
                        });
                    }}>Add Card</Text>
                </TouchableOpacity>
+
            </View>
+               <TouchableOpacity
+                   onPress={() => {
+                       this.props.navigation.navigate('Quiz', {
+                           title,
+                           questions,
+                       });
+                   }}
+                   style={styles.startQuiz}>
+                   <Text style={styles.Titles}>Start Quiz</Text>
+               </TouchableOpacity>
            </View>
 
        )
@@ -39,17 +50,29 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     addcard: {
-        flexDirection: 'row',
-        marginTop: 100,
-        height: 120,
-        backgroundColor: '#00fdff',
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: '#000',
+        margin: 30,
+        padding: 10,
+        height: 60,
+        borderRadius: 12,
 
     },
     text: {
         color:'#11000c',
         fontSize:24
+    },
+    startQuiz: {
+        backgroundColor: '#000',
+        margin: 30,
+        padding: 10,
+        height: 60,
+        borderRadius: 12,
+    },
+    Titles: {
+        textAlign: 'center',
+        fontSize: 22,
+        color: '#fff',
+
     }
 });
 function mapStateToProps(state) {

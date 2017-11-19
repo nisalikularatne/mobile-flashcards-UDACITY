@@ -23,6 +23,11 @@ export default class Quiz extends React.Component {
     startQuiz = () => {
         this.setState({IndexQuestion: 0, correctAnswers: 0, shouldShowAnswer: false});
     };
+    backToDeck = () => {
+        this.props.navigation.goBack();
+
+    }
+
 
 
     render() {
@@ -106,21 +111,25 @@ export default class Quiz extends React.Component {
 
                                 <TouchableOpacity onPress={this.startQuiz}>
                                     <Text style={{
-                                        backgroundColor: '#70dd2f',
+                                        backgroundColor: '#beddcf',
                                         justifyContent: 'center',
-                                        height: 30,
+                                        height: 60,
                                         textAlign: 'center',
-                                        width: 200
-                                    }}>Start Quiz</Text>
+                                        width: 200,
+                                        borderRadius:12,
+                                        fontSize:20
+                                    }}>Restart Quiz</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={ this.props.navigation.goBack()}>
+                                <TouchableOpacity onPress={this.backToDeck}>
                                     <Text style={{
-                                        height: 30,
+                                        height: 60,
                                         textAlign: 'center',
                                         width: 200,
                                         marginTop: 20,
-                                        backgroundColor: '#ff463f',
+                                        backgroundColor: '#fff5f8',
                                         justifyContent: 'center',
+                                        borderRadius:12,
+                                        fontSize:20,
 
                                     }}>Go to Deck View</Text>
                                 </TouchableOpacity>

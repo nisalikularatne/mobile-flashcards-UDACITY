@@ -1,7 +1,7 @@
 import {AsyncStorage} from 'react-native';
-
+import {Notifications, Permissions} from 'expo';
 export const DECKS_STORAGE_KEY = 'decks:mobile-flashcards';
-
+const NOTIFICATION_KEY = 'notification:mobile-flashcards';
 let information = {
     React: {
         title: 'React',
@@ -60,3 +60,45 @@ export function addQuestionForDeck({card, deckName}) {
     });
 }
 
+//Notification API
+function returnNotification() {
+    return {
+        title: 'Mobile Flashcards',
+        body: "New Question for the day",
+        ios: {
+            sound: true
+        },
+        android: {
+            sound: true
+        },
+    };
+}
+
+export function sendNotification() {
+    AsyncStorage.getItem(NOTIFICATION_KEY)
+        .then(JSON.parse)
+        .then(data => {
+            if (!data) {
+                Permissions.askAsync(Permissions.NOTIFICATIONS).then(({status}) => {
+                    if (status === 'granted') {
+                        Notifications.cancelAllScheduledNotificationsAsync().then(() => {
+                            let today = new Date();
+                            today.setDate(today.getDate());
+                            today.setHours(23, 0, 0);
+
+                            const notification = returnNotification();
+
+                            Notifications.scheduleLocalNotificationAsync(notification, {
+                                time: today,
+                                repeat: 'day',
+                            }).then(result => {
+
+                            });
+                        });
+
+                        AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
+                    }
+                });
+            }
+        });
+}

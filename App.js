@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DeckList from "./components/DeckList";
 import NewQuestion from "./components/NewQuestion";
+import {sendNotifications} from '../utils/AsyncStorage'
 import Quiz from "./components/Quiz";
 import NewDeck from "./components/NewDeck";
 import IndividualDeckView from "./components/IndividualDeckView";
@@ -57,7 +58,11 @@ const MainNavigator = StackNavigator({
 
 });
 export default class App extends React.Component {
+    componentDidMount() {
+        sendNotifications();
+    }
   render() {
+
     return (
         <Provider store={createStore(reducer)}>
             <View  style={{flex: 1}}>
